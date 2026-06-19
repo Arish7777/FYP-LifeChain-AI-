@@ -1,0 +1,108 @@
+LifeChain AI
+Current Project Summary
+
+LifeChain AI is a healthcare records and clinical intelligence platform built to unify patient data,
+clinical workflows, laboratory reporting, family-history context, and AI-assisted disease tracking
+in one system.
+
+This repository contains the active implementation of the platform rather than the original FYP
+proposal draft. The codebase is split into a FastAPI backend, a Next.js frontend, model training
+utilities, trained model artifacts, and supporting documentation.
+
+Project goals
+
+- Maintain a single longitudinal patient record across visits, reports, diagnoses, prescriptions,
+  and disease progression history
+- Support separate role-based workflows for admins, doctors, patients, and labs
+- Enable chronic disease monitoring from structured lab values
+- Support oral cancer image screening and progression tracking
+- Link patient family relationships for hereditary context and disease-history analysis
+- Provide multilingual utilities and an extensible AI-assisted healthcare workflow
+
+Current implemented scope
+
+1. Patient management
+   - create, update, search, and view patient profiles
+   - unique patient identity tied to the rest of the platform
+   - family relationship graph and family disease history access
+
+2. Doctor workflows
+   - create doctor profiles
+   - manage visits, symptoms, diagnoses, and prescriptions
+   - review patient history and progression reports
+
+3. Lab workflows
+   - create lab profiles and reports
+   - add structured test results from supported reference ranges
+   - mark reports as completed to trigger downstream progression and diagnosis updates
+   - upload oral scan images and store screening results
+
+4. AI and analytics
+   - multi-disease structured inference support
+   - progression timeline and forecast reporting
+   - oral cancer image-based detection workflow
+   - model training and evaluation utilities under model_training/
+
+5. Platform services
+   - JWT authentication and role checks
+   - translation endpoints
+   - SMTP-based credential email delivery for newly created doctor and lab accounts
+
+Technology stack
+
+- Backend: FastAPI, SQLAlchemy, Alembic, PostgreSQL, Pydantic
+- Frontend: Next.js 16, React 19, TypeScript, Tailwind CSS v4, Framer Motion
+- AI/ML: TensorFlow, PyTorch, XGBoost, scikit-learn, Roboflow integrations
+- Dev runtime: Docker Compose with separate backend and frontend containers
+
+Important directories
+
+- app/ - backend application code
+- frontend/ - Next.js frontend
+- migrations/ - Alembic migrations
+- model_training/ - training and model test scripts
+- models/ - trained model artifacts and feature configs
+- docs/ - supplementary documentation
+- tests/ - backend tests
+
+Local development defaults
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8000
+- API docs: http://localhost:8000/docs
+
+Main API groups
+
+- /api/v1/auth
+- /api/v1/health
+- /api/v1/patients
+- /api/v1/doctors
+- /api/v1/visits
+- /api/v1/labs
+- /api/v1/ml
+- /api/v1/ml/oral-cancer
+- /api/v1/reports
+- /api/v1/proposal
+- /api/v1/translation
+
+Current disease focus
+
+- diabetes
+- chronic kidney disease
+- iron deficiency anemia
+- parathyroid disorders
+- oral cancer
+
+Operational notes
+
+- The current source of truth is the running code, not older proposal-era documents.
+- Environment variables are loaded from .env by the backend.
+- Gmail SMTP requires an App Password for successful credential delivery.
+- Some older docs may describe earlier APIs or proposal placeholders; verify against code when in doubt.
+
+Recommended starting points
+
+- Root README.md for setup, structure, and development workflow
+- app/main.py for backend application startup
+- app/api/v1/api.py for router registration
+- frontend/src/app/ for frontend routes and role-specific pages
